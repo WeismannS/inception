@@ -1,0 +1,8 @@
+CREATE DATABASE IF NOT EXISTS wordpress;
+
+CREATE USER IF NOT EXISTS 'wpuser'@'%' IDENTIFIED BY 'wppass';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'wpuser'@'%';
+
+CREATE USER IF NOT EXISTS 'admin'@'%' IDENTIFIED BY 'adminpass';
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;
+

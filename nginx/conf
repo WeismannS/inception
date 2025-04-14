@@ -16,10 +16,10 @@ server {
         root /var/www/inception/htdocs/wordpress;
    index         index.php;
    server_name   localhost;
-   # configure php
    location ~ \.php$ {
-              fastcgi_pass      0.0.0.0:9000;
-              fastcgi_index     index.php;
+              fastcgi_pass      php-fpm:9000;
+  fastcgi_param SCRIPT_FILENAME /var/www/inception/htdocs/$fastcgi_script_name;
+              fastcgi_index     /var/www/inception/htdocs/index.php;
               include           fastcgi.conf;
     }
 }

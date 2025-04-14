@@ -1,0 +1,45 @@
+services:
+  server:
+    build: ./nginx
+    depends_on:
+      - php-fpm
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - wordpressVolume:/var/www/inception/htdocs/wordpress
+    restart: always
+    networks:
+      - inception
+
+  php-fpm:
+    container_name: php-fpm
+    build: ./wordpress
+    depends_on:
+      - mariadb
+    expose:
+      - "9000"
+    volumes:
+      - wordpressVolume:/var/www/inception/htdocs/wordpress
+    restart: always
+    networks:
+      - inception
+
+  mariadb:
+    build: ./MariaDB
+    env_file:
+      - .env
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - inception
+
+
+volumes:
+  wordpressVolume:
+  mariadb_data:
+
+networks:
+  inception:
