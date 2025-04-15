@@ -18,6 +18,7 @@ services:
     build: ./wordpress
     depends_on:
       - mariadb
+      - redis
     expose:
       - "9000"
     volumes:
@@ -27,7 +28,8 @@ services:
       - inception
     env_file:
       - .env
-
+    environment:
+      - redis=true
   mariadb:
     container_name: mariadb
     build: ./mariadb
@@ -39,7 +41,11 @@ services:
       - mariadb_data:/var/lib/mysql
     networks:
       - inception
-
+  redis : 
+    container_name: redis 
+    build : ./bonus/redis
+    networks:
+      - inception
 
 volumes:
   wordpressVolume:

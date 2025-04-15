@@ -6,7 +6,7 @@ server {
 
 server {
     listen 443 ssl;
-    server_name inception;
+    server_name baarif.42.fr;
 
     ssl_certificate /etc/nginx/ssl/inception.crt;
     ssl_certificate_key /etc/nginx/ssl/inception.key;
@@ -15,10 +15,9 @@ server {
 
         root /var/www/inception/htdocs/wordpress;
    index         index.php;
-   server_name   localhost;
    location ~ \.php$ {
               fastcgi_pass      php-fpm:9000;
-  fastcgi_param SCRIPT_FILENAME /var/www/inception/htdocs/$fastcgi_script_name;
+              fastcgi_param SCRIPT_FILENAME /var/www/inception/htdocs/$fastcgi_script_name;
               fastcgi_index     /var/www/inception/htdocs/index.php;
               include           fastcgi.conf;
     }
