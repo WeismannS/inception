@@ -11,10 +11,14 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -out /etc/nginx/ssl/inception.crt \
   -subj "/CN=inception" \
   -addext "subjectAltName=DNS:inception,IP:127.0.0.1"
-
 RUN mkdir -p /var/www/inception/htdocs/wordpress
 
-COPY conf /etc/nginx/http.d/default.conf
+  RUN addgroup -g 82 -S www-data || true && \
+    adduser -u 82 -D -S -G www-data www-data || true && \
+    chown -R www-data:www-data /var/www/inception/htdocs/wordpress && \
+    chmod -R 755 /var/www/inception/htdocs/wordpress
+
+COPY ./conf/conf /etc/nginx/http.d/default.conf
 
 CMD ["nginx", "-g", "daemon off;"]
 

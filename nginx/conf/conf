@@ -3,7 +3,6 @@ server {
     server_name inception;
     return 301 https://$host$request_uri;
 }
-
 server {
     listen 443 ssl;
     server_name baarif.42.fr;
@@ -21,4 +20,22 @@ server {
               fastcgi_index     /var/www/inception/htdocs/index.php;
               include           fastcgi.conf;
     }
+
+    location /adminer {
+    root /var;
+    index index.php;
+
+    include fastcgi_params;
+    fastcgi_pass php-fpm:9000;
+    fastcgi_index index.php;
+    fastcgi_param SCRIPT_FILENAME /var$fastcgi_script_name;
+}
+    location /static_page/ {
+        alias /var/www/inception/htdocs/static_page/;
+        index index.html;
+    }
+    location /portainer/ {
+            proxy_pass http://portainer:9000/;
+            proxy_connect_timeout 15s;
+        }
 }

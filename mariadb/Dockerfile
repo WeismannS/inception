@@ -8,14 +8,13 @@ RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld && \
 RUN echo -e "[mysqld]\nuser=mysql\nbind-address=0.0.0.0\nport=3306" > /etc/my.cnf.d/mariadb-server.cnf
 
 # Create initialization script
-COPY init.sql /docker-entrypoint-initdb.d/
+COPY ./tools/init.sql /docker-entrypoint-initdb.d/
 RUN chmod 755 /docker-entrypoint-initdb.d/init.sql
 
 EXPOSE 3306
 
 # Create entrypoint script
-COPY docker-entrypoint.sh /
+COPY ./tools/docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["mysqld"]

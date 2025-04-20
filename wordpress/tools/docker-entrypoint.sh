@@ -8,7 +8,7 @@ wp-cli.phar config create --dbname=wordpress --dbuser=${MYSQL_USER} --dbpass=${M
 echo "[WP config] Installing WordPress core..."
 wp-cli.phar core install --url="localhost" --title=incpetion --admin_user=${WP_ADMIN_USER} --admin_password=${WP_ADMIN_PASS} --admin_email=admin@gmail.com --path=/var/www/inception/htdocs/wordpress --allow-root
 echo "[WP config] Creating WordPress default user..."
-g
+
 if [ "$redis" = "true" ]; then
   echo "[Redis setup] Installing and activating Redis plugin..."
   wp-cli.phar plugin install redis-cache --activate --allow-root --path=/var/www/inception/htdocs/wordpress
