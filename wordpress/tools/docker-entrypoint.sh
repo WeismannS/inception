@@ -15,4 +15,5 @@ echo "[Redis setup] Configuring Redis to connect to the Redis container..."
 wp-cli.phar config set WP_REDIS_HOST redis --allow-root --path=/var/www/inception/htdocs/wordpress
 echo "[Redis setup] Enabling Redis object cache..."
 wp-cli.phar redis enable --allow-root --path=/var/www/inception/htdocs/wordpress
-exec php-fpm8 -F
+
+exec php-fpm83 -F

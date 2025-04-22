@@ -6,7 +6,6 @@ services:
       - php-fpm
       - portainer
     ports:
-      - "80:80"
       - "443:443"
     volumes:
       - wordpressVolume:/var/www/inception/htdocs/wordpress
@@ -76,6 +75,8 @@ services:
   portainer : 
     container_name : portainer 
     build : ./bonus/portainer
+    volumes:
+     - /var/run/docker.sock:/var/run/docker.sock
     networks :
       - inception
     restart : always 

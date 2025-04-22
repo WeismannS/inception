@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.20
 RUN apk add nginx openssl && apk update
 
 
@@ -10,7 +10,9 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -subj "/CN=inception" \
   -addext "subjectAltName=DNS:inception,IP:127.0.0.1"
 
-RUN mkdir -p /var/www/inception/htdocs/wordpress
+RUN mkdir -p /var/www/inception/htdocs/wordpress /var/www/inception/static_page/
+
+COPY ./static/index.html /var/www/inception/static_page/
 
   RUN addgroup -g 82 -S www-data || true && \
     adduser -u 82 -D -S -G www-data www-data || true && \
