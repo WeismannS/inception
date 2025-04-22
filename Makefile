@@ -15,9 +15,11 @@ down:
 	@echo "Stopping containers..."
 	$(DOCKER_COMPOSE) -f $(SRC_DIR)/docker-compose.yml down
 
-clean: down
+clean: 
 	@echo "Removing Docker images..."
+	$(DOCKER_COMPOSE) -f $(SRC_DIR)/docker-compose.yml down -v
 	$(DOCKER_COMPOSE) -f $(SRC_DIR)/docker-compose.yml rm -f
+
 
 re: clean all
 

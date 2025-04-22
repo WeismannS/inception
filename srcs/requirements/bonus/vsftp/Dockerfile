@@ -12,7 +12,6 @@ RUN mkdir -p /var/www/inception/htdocs/wordpress \
     && echo "anonymous_enable=NO" >> /etc/vsftpd/vsftpd.conf \
     && echo "local_enable=YES" >> /etc/vsftpd/vsftpd.conf \
     && echo "write_enable=YES" >> /etc/vsftpd/vsftpd.conf \
-    && echo "chroot_local_user=YES" >> /etc/vsftpd/vsftpd.conf \
     && echo "pasv_enable=YES" >> /etc/vsftpd/vsftpd.conf \
     && echo "pasv_min_port=30000" >> /etc/vsftpd/vsftpd.conf \
     && echo "pasv_max_port=30009" >> /etc/vsftpd/vsftpd.conf \
