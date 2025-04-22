@@ -1,4 +1,4 @@
-FROM alpine:3.19
+FROM alpine:latest
 
 
 ADD https://github.com/vrana/adminer/releases/download/v5.2.1/adminer-5.2.1.php /var/adminer/index.php

@@ -1,8 +1,4 @@
-server {
-    listen 80;
-    server_name inception;
-    return 301 https://$host$request_uri;
-}
+
 server {
     listen 443 ssl;
     server_name baarif.42.fr;

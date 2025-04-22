@@ -4,29 +4,36 @@ services:
     container_name: nginx
     depends_on:
       - php-fpm
+      - portainer
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - wordpressVolume:/var/www/inception/htdocs/wordpress
-    restart: always
+      - adminerVolume:/var/adminer
     networks:
       - inception
+    restart : always
 
   php-fpm:
     container_name: php-fpm
     build: ./wordpress
     depends_on:
       - mariadb
+      - redis
+      - adminer
     expose:
       - "9000"
     volumes:
       - wordpressVolume:/var/www/inception/htdocs/wordpress
-    restart: always
+      - adminerVolume:/var/adminer
     networks:
       - inception
     env_file:
       - .env
+    environment:
+      - redis=true
+    restart : always
 
   mariadb:
     container_name: mariadb
@@ -39,11 +46,43 @@ services:
       - mariadb_data:/var/lib/mysql
     networks:
       - inception
+    restart: always
+  
+  redis : 
+    container_name: redis 
+    build : ./bonus/redis
+    networks:
+      - inception
+    restart: always
 
+  vsftp :
+    container_name: vsftp
+    build: ./bonus/vsftp
+    ports:
+      - "21:21"
+      - "20:20"
+      - "30000-30009:30000-30009" 
+    volumes:
+      - wordpressVolume:/var/www/inception/htdocs/wordpress
+    restart: always
+    networks:
+      - inception
+  
+  adminer : 
+    container_name : adminer
+    build : ./bonus/adminer
+    volumes : 
+      - adminerVolume:/var/adminer
+  portainer : 
+    container_name : portainer 
+    build : ./bonus/portainer
+    networks :
+      - inception
+    restart : always 
 
 volumes:
   wordpressVolume:
   mariadb_data:
-
+  adminerVolume:
 networks:
   inception:
