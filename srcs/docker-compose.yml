@@ -83,7 +83,20 @@ services:
 
 volumes:
   wordpressVolume:
-  mariadb_data:
+    driver_opts:
+        type : none
+        device: /home/baarif/data/wordpress
+        o : bind
+  mariadb_data: 
+    driver_opts:
+        type : none
+        device: /home/baarif/data/mariadb
+        o : bind
   adminerVolume:
+    driver_opts:
+        type : none
+        device: /home/baarif/data/adminer
+        o : bind
+  
 networks:
   inception:

@@ -20,6 +20,9 @@ clean:
 	$(DOCKER_COMPOSE) -f $(SRC_DIR)/docker-compose.yml down -v
 	$(DOCKER_COMPOSE) -f $(SRC_DIR)/docker-compose.yml rm -f
 
+fclean:
+	@echo "Removing all stopped containers, networks, images, and volumes..."
+	$(DOCKER_COMPOSE) -f $(SRC_DIR)/docker-compose.yml down --rmi all --volumes --remove-orphans
 
 re: clean all
 
