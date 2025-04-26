@@ -23,7 +23,9 @@ clean:
 fclean:
 	@echo "Removing all stopped containers, networks, images, and volumes..."
 	$(DOCKER_COMPOSE) -f $(SRC_DIR)/docker-compose.yml down --rmi all --volumes --remove-orphans
-
-re: clean all
+	sudo rm -rf /home/baarif/data/adminer/*
+	sudo rm -rf /home/baarif/data/wordpress/*
+	sudo rm -rf /home/baarif/data/mariadb/*
+re: fclean all
 
 .PHONY: all build up down clean re

@@ -10,8 +10,9 @@ done
 
 if [ ! -f /var/lib/mysql/.initialized ]; then
   echo "Initializing database..."
-  sed /s/REDACTED_PASS/${MYSQL_PASSWORD}/g /docker-entrypoint-initdb.d/init.sql 
+  sed -i "s/REDACTED_PASS/${MYSQL_PASSWORD}/g" /docker-entrypoint-initdb.d/init.sql
   sed -i "s/REDACTED_USER/${MYSQL_USER}/g" /docker-entrypoint-initdb.d/init.sql
+  echo "Database credentials have been configured."
   mysql < /docker-entrypoint-initdb.d/init.sql
   touch /var/lib/mysql/.initialized
 fi
