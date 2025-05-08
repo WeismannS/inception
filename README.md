@@ -1,6 +1,3 @@
-Sure! Here's the full content as a markdown file — you can copy and save it as `README.md`:
-
-```markdown
 # 🐳 Inception - 42 Network Project
 
 ## 🧠 Project Overview
@@ -31,7 +28,6 @@ This infrastructure is composed of the following core services, each running in 
 ## 🌐 Domain Configuration
 
 Set your domain to:  
-```
 
 \<your\_login>.42.fr → points to your VM's local IP
 
